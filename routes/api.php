@@ -34,8 +34,6 @@ Route::put('pacientes/{id}', [PacienteController::class, 'update']);
 Route::get('agendamentos', [AgendamentoController::class, 'index']);
 Route::post('agendamentos/ativos', [AgendamentoController::class, 'indexDate']);
 Route::get('agendamentos/id/{id}',[AgendamentoController::class, 'show']);
-
-Route::post('agendamentos/horario',[AgendamentoController::class, 'testeHorario']);
 // Route::get('agendamentos/cpf/{cpf}',[AgendamentoController::class, 'showCpf']);
 Route::post('agendamentos', [AgendamentoController::class, 'store']);
 Route::put('agendamentos/{id}', [AgendamentoController::class, 'update']);

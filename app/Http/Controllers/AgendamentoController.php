@@ -42,12 +42,12 @@ class AgendamentoController extends Controller
 
 
     public function testeHorario($data){
-       $agendamento1 =  Agendamento::all()->where('consultorio',1)->where('data','==',Carbon::parse($data));
-
+       $agendamento1 =  Agendamento::all()->where('consultorio',1)->where("horario",$data);
+       
        if(count($agendamento1)==0){
             return 1;
        }else{
-            $agendamento2 =  Agendamento::all()->where('consultorio',2)->where('data','==',Carbon::parse($data));
+            $agendamento2 =  Agendamento::all()->where('consultorio',2)->where('horario',$data);
 
             if(count($agendamento2)==0){
                 return 2;
@@ -94,6 +94,7 @@ class AgendamentoController extends Controller
 
         $request['consultorio'] = $clinica;
         $resultado['status'] = true;
+        $request['horario'] = $request['data'];
         $resultado['dados'] = Agendamento::create($request->all());
         return $resultado;
          
