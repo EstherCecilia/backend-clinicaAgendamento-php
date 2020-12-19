@@ -38,3 +38,7 @@ Route::get('agendamentos/id/{id}',[AgendamentoController::class, 'show']);
 Route::post('agendamentos', [AgendamentoController::class, 'store']);
 Route::put('agendamentos/{id}', [AgendamentoController::class, 'update']);
 Route::delete('agendamentos/{id}', [AgendamentoController::class, 'delete']);
+
+
+Route::get('agendamentos/price/{id}',[AgendamentoController::class, 'indexPrice']);
+

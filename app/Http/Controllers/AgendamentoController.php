@@ -16,7 +16,20 @@ class AgendamentoController extends Controller
 
     public function indexDate(Request $request)
     {
-        return Agendamento::all()->where('data','>=',Carbon::parse($request['data']));
+        return Agendamento::all()->where('data','>=',Carbon::now());
+    }
+
+    public function indexPrice($id)
+    {
+        $agendamentos =Agendamento::all()->where('codigo_paciente',$id)->where('situacao',"pendente");
+
+        $resultado['agendamentos'] = $agendamentos;
+        $resultado['status'] = true;
+        $resultado['price']=count($agendamentos)*70;
+
+
+
+        return $resultado;
     }
 
     // public function showCpf($cpf)
