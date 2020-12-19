@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendamento;
+use App\Models\Paciente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -19,12 +20,34 @@ class AgendamentoController extends Controller
         return Agendamento::all()->where('data','>=',Carbon::now());
     }
 
+    public function cachPrice(Request $request)
+    {
+
+        $ids = $request->get('ids');
+        try {
+            $notas["situacao"] = Agendamento::where('id', $ids)->where('situacao','pendente')
+                        ->update(['situacao' => "pago"]);
+                    
+            
+        } catch (Exception $e) {
+            return array("resposta" => "Erro ao pagar documento" . $e->getMessage() . "-" . $e->getLine());
+        }
+        if (empty($notas)) {
+            $notas = ["resposta" => 0];
+        }
+ 
+        return $notas;
+    }
+
     public function indexPrice($id)
     {
-        $agendamentos =Agendamento::all()->where('codigo_paciente',$id)->where('situacao',"pendente");
+
+        $paciente = Paciente::find($id);
+        $agendamentos = Agendamento::all()->where('codigo_paciente',$id)->where('situacao',"pendente");
 
         $resultado['agendamentos'] = $agendamentos;
         $resultado['status'] = true;
+        $resultado['paciente']=$paciente;
         $resultado['price']=count($agendamentos)*70;
 
 

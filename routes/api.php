@@ -41,4 +41,5 @@ Route::delete('agendamentos/{id}', [AgendamentoController::class, 'delete']);
 
 
 Route::get('agendamentos/price/{id}',[AgendamentoController::class, 'indexPrice']);
+Route::post('agendamentos/price', [AgendamentoController::class, 'cachPrice']);
 
