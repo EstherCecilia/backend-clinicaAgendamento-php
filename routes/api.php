@@ -31,7 +31,8 @@ Route::put('pacientes/{id}', [PacienteController::class, 'update']);
 //Route::delete('pacientes/{id}', [PacienteController::class, 'delete']);
 
 
-Route::get('agendamentos', [AgendamentoController::class, 'index']);
+Route::get('agendamentos', [AgendamentoController::class, 'index2']);
+Route::get('agendamento', [AgendamentoController::class, 'index']);
 Route::post('agendamentos/ativos', [AgendamentoController::class, 'indexDate']);
 Route::get('agendamentos/id/{id}',[AgendamentoController::class, 'show']);
 // Route::get('agendamentos/cpf/{cpf}',[AgendamentoController::class, 'showCpf']);

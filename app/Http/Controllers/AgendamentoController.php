@@ -15,9 +15,23 @@ class AgendamentoController extends Controller
         return Agendamento::all();
     }
 
+    public function index2()
+    {
+        $resultado = array();
+        $agendamentos = Agendamento::all();
+
+        foreach ($agendamentos as $value) {
+            $paciente = Paciente::where('id', $value->codigo_paciente)->first();
+            $resultado[$value->id]['paciente'] = $paciente;
+            $resultado[$value->id]['consulta'] = $value;
+        }
+        return $resultado;
+    }
+
     public function indexDate(Request $request)
     {
         return Agendamento::all()->where('data','>=',Carbon::now());
+
     }
 
     public function cachPrice(Request $request)
