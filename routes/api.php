@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\AgendamentoController;
+use App\Http\Controllers\ConsultaController;
 
 
 /*
@@ -43,4 +44,8 @@ Route::delete('agendamentos/{id}', [AgendamentoController::class, 'delete']);
 
 Route::get('agendamentos/price/{id}',[AgendamentoController::class, 'indexPrice']);
 Route::post('agendamentos/price', [AgendamentoController::class, 'cachPrice']);
+
+
+
+Route::get('consultas', [ConsultaController::class, 'index']);
 

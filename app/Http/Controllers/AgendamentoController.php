@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agendamento;
 use App\Models\Paciente;
+use App\Models\Consulta;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -58,11 +59,20 @@ class AgendamentoController extends Controller
 
         $paciente = Paciente::find($id);
         $agendamentos = Agendamento::all()->where('codigo_paciente',$id)->where('situacao',"pendente");
+        $consultas = Consulta::all();
+
 
         $resultado['agendamentos'] = $agendamentos;
         $resultado['status'] = true;
         $resultado['paciente']=$paciente;
-        $resultado['price']=count($agendamentos)*70;
+        $resultado['price'] = 0;
+
+        foreach ($agendamentos as $agendamento){
+            $con = array_search($agendamento['consulta_code'], array_column($consultas, 'code'))['preco'];
+
+            $resultado['price']+=$con;
+        }
+        // $resultado['price']=count($agendamentos)*70;
 
 
 
